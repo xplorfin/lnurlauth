@@ -11,4 +11,4 @@ A golang lnurl example implementation. As per the [lnurl-rfc](https://github.com
 
 1. [auth](auth.go): A canonical way to authenticate users with lnurl 
 
-This library is based on [passport-ln-url-auth](https://github.com/chill117/passport-lnurl-auth) and utilizes [go-lnurl](github.com/fiatjaf/go-lnurl).
+This library is based on [passport-ln-url-auth](https://github.com/chill117/passport-lnurl-auth) and utilizes [go-lnurl](https://github.com/fiatjaf/go-lnurl).
