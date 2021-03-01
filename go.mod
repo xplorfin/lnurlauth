@@ -1,3 +1,5 @@
+// +heroku goVersion go1.15
+// see: https://git.io/Jtx7m Heroku requires this currently
 module github.com/xplorfin/lnurlauth
 
 go 1.15
