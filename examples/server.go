@@ -56,7 +56,7 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) error
 		return nil
 	})
 
-	err := g.Wait()
+	err = g.Wait()
 	return err
 }
 
