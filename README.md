@@ -7,7 +7,7 @@
 
 # LN Url
 
-A golang lnurl example implementation. As per the [lnurl-rfc](https://github.com/fiatjaf/lnurl-rfc) this library also provides:
+A golang lnurl example implementation by [entropy](https://entropy.rocks). As per the [lnurl-rfc](https://github.com/fiatjaf/lnurl-rfc) this library also provides:
 
 1. [auth](auth.go): A canonical way to authenticate users with lnurl 
 
