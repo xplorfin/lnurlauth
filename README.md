@@ -4,6 +4,7 @@
 [![Build status](https://github.com/xplorfin/lnurlauth/workflows/goreleaser/badge.svg)](https://github.com/xplorfin/lnurlauth/actions?query=workflow%3Agoreleaser)
 [![](https://godoc.org/github.com/xplorfin/lnurlauth?status.svg)](https://godoc.org/github.com/xplorfin/lnurlauth)
 [![Go Report Card](https://goreportcard.com/badge/github.com/xplorfin/lnurlauth)](https://goreportcard.com/report/github.com/xplorfin/lnurlauth)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/xplorfin/lnurlauth)
 
 # LN Url
 

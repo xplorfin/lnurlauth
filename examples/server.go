@@ -8,13 +8,14 @@ import (
 	"github.com/xplorfin/lnurlauth/integration"
 	"golang.org/x/sync/errgroup"
 	"net/http"
+	"os"
 )
 
-func Start(ctx context.Context, localTunnels, open bool) error {
+func Start(ctx context.Context, localTunnels, open bool, port, url string) error {
 	var (
-		server http.Server
+		server              http.Server
 		localTunnelListener *localtunnel.Listener
-		url string
+		err                 error
 	)
 
 	// Setup a localTunnelListener for localtunnel
@@ -24,17 +25,21 @@ func Start(ctx context.Context, localTunnels, open bool) error {
 			panic(err)
 		}
 		url = localTunnelListener.URL()
-		server = integration.GenerateServer(url)
-	} else {
-
 	}
+
+	server = integration.GenerateServer(url)
 
 	g, _ := errgroup.WithContext(ctx)
 
 	// Handle request from localtunnel
 	g.Go(func() error {
 		fmt.Println("starting server")
-		err := server.Serve(localTunnelListener)
+		if localTunnels {
+			err = server.Serve(localTunnelListener)
+		} else {
+			server.Addr = fmt.Sprintf(":%d", port)
+			err = server.ListenAndServe()
+		}
 		if err != nil {
 			panic(err)
 		}
@@ -52,4 +57,12 @@ func Start(ctx context.Context, localTunnels, open bool) error {
 
 	err := g.Wait()
 	return err
+}
+
+func getEnv(configVar, defaultVar string) (result string) {
+	result = os.Getenv(configVar)
+	if result == "" {
+		return defaultVar
+	}
+	return result
 }
