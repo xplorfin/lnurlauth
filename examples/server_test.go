@@ -72,7 +72,7 @@ func TestLocalTunnelsStart(t *testing.T) {
 		args := os.Args[0:1]
 		args = append(args, "-open=false")
 
-		go Start(args)
+		go Cmd(args)
 		for {
 			// wait till server url is set
 			if serverUrl != "" {

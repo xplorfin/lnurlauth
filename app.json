@@ -8,5 +8,5 @@
       "description": "Go version. This must be explicitly specified in heroku, see https://git.io/Jtx7m for details",
       "value": "1.15"
     }
-  }
+  },
 }

@@ -11,6 +11,8 @@ import (
 	"os"
 )
 
+var serverUrl = ""
+
 func Start(ctx context.Context, localTunnels, open bool, port, url string) error {
 	var (
 		server              http.Server
@@ -18,17 +20,21 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) error
 		err                 error
 	)
 
+	serverUrl = url
+	if port != ""{
+		serverUrl = fmt.Sprintf("%s:%s", serverUrl, port)
+	}
 
 	// Setup a localTunnelListener for localtunnel
 	if localTunnels {
-		localTunnelListener, err := localtunnel.Listen(localtunnel.Options{})
+		localTunnelListener, err = localtunnel.Listen(localtunnel.Options{})
 		if err != nil {
 			panic(err)
 		}
-		url = localTunnelListener.URL()
+		serverUrl = localTunnelListener.URL()
 	}
 
-	server = integration.GenerateServer(url)
+	server = integration.GenerateServer(serverUrl)
 
 	g, _ := errgroup.WithContext(ctx)
 

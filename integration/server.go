@@ -62,6 +62,7 @@ func GenerateServer(host string) http.Server {
 
 	// redirect to login page
 	res.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println(r.Host)
 		if isAuthenticated(w, r) {
 			http.Redirect(w, r, "/", 302)
 			return

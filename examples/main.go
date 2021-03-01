@@ -8,7 +8,6 @@ import (
 	"strconv"
 )
 
-var serverUrl = ""
 
 func Cmd(args []string) {
 	app := &cli.App{
@@ -33,7 +32,7 @@ func Cmd(args []string) {
 			&cli.StringFlag{
 				Name:  "url",
 				Usage: "url to send callbacks from, ignored if localtunnels is set",
-				Value: getEnv("URL", "localhost"),
+				Value: getEnv("URL", "http://localhost"),
 			},
 		},
 		Action: func(c *cli.Context) error {
