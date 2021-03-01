@@ -39,7 +39,7 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) error
 			err = server.Serve(localTunnelListener)
 		} else {
 			fmt.Println(fmt.Sprintf("starting server at %s on port %s", url, port))
-			server.Addr = fmt.Sprintf("localhost:%s", port)
+			server.Addr = fmt.Sprintf(":%s", port)
 			err = server.ListenAndServe()
 		}
 		if err != nil {
