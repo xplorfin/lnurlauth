@@ -18,6 +18,7 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) error
 		err                 error
 	)
 
+
 	// Setup a localTunnelListener for localtunnel
 	if localTunnels {
 		localTunnelListener, err := localtunnel.Listen(localtunnel.Options{})
