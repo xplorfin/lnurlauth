@@ -1,6 +1,6 @@
 module github.com/xplorfin/lnurlauth
 
-go 1.14
+go 1.15
 
 require (
 	github.com/brianvoe/gofakeit/v5 v5.11.2
