@@ -45,7 +45,7 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) error
 			err = server.Serve(localTunnelListener)
 		} else {
 			fmt.Println(fmt.Sprintf("starting server at %s on port %s", serverUrl, port))
-			server.Addr = fmt.Sprintf(":%s", port)
+			server.Addr = fmt.Sprintf(serverUrl, port)
 			err = server.ListenAndServe()
 		}
 		if err != nil {
@@ -58,7 +58,7 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) error
 		// bypass localtunnel authorization screen for this ip
 		if open {
 			fmt.Println("attempting to open browser")
-			_ = browser.OpenURL(url)
+			_ = browser.OpenURL(serverUrl)
 		}
 		return nil
 	})
