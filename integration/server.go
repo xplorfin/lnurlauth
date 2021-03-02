@@ -29,7 +29,7 @@ func isAuthenticated(w http.ResponseWriter, r *http.Request) (isAuthenticated bo
 		authParams := ParseUrl(authToken)
 		if authParams.K1 != "" {
 			sessionData := sessionStore.Get(authParams.K1)
-			if sessionData.Key != "" {
+			if sessionData != nil && sessionData.Key != "" {
 				isAuthenticated = true
 			}
 		}
@@ -43,7 +43,7 @@ func returnJson(v interface{}, w http.ResponseWriter) {
 	_, _ = w.Write(res)
 }
 
-func GenerateServer(host string) http.Server {
+func GenerateServer() http.Server {
 	res := http.NewServeMux()
 
 	// redirect to login page
