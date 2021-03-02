@@ -74,7 +74,6 @@ func GenerateServer(host string) http.Server {
 			http.SetCookie(w, &http.Cookie{Name: CookieName, Value: parsedUrl, HttpOnly: false})
 			sessionStore.Set(ParseUrl(parsedUrl).K1, lnurlauth.SessionData{
 				LnUrl:  encodedUrl,
-				RawUrl: parsedUrl,
 				Key:    "",
 			})
 		} else {
@@ -106,7 +105,6 @@ func GenerateServer(host string) http.Server {
 
 		sessionStore.Set(k1, lnurlauth.SessionData{
 			LnUrl:  sessionData.LnUrl,
-			RawUrl: sessionData.RawUrl,
 			Key:    key,
 		})
 

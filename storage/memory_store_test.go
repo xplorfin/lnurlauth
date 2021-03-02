@@ -18,7 +18,6 @@ func TestMemorySessionStore(t *testing.T) {
 
 	sessionData := lnurlauth.SessionData{
 		LnUrl:  base64.StdEncoding.EncodeToString([]byte(gofakeit.Sentence(10))),
-		RawUrl: gofakeit.URL(),
 		Key:    gofakeit.BitcoinPrivateKey(),
 	}
 

@@ -2,7 +2,6 @@ package lnurlauth
 
 type SessionData struct {
 	LnUrl  string `json:"ln_url"`
-	RawUrl string `json:"raw_url"`
 	Key    string `json:"key"`
 }
 
