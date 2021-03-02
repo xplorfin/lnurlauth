@@ -32,7 +32,7 @@ func Cmd(args []string) {
 			&cli.StringFlag{
 				Name:  "hostname",
 				Usage: "hostname to start server on",
-				Value: getEnv("host", "localhost"),
+				Value: getEnv("rando", "localhost"),
 			},
 		},
 		Action: func(c *cli.Context) error {
