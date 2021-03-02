@@ -62,7 +62,6 @@ func GenerateServer(host string) http.Server {
 
 	// redirect to login page
 	res.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println(r.Host)
 		if isAuthenticated(w, r) {
 			http.Redirect(w, r, "/", 302)
 			return
@@ -70,7 +69,7 @@ func GenerateServer(host string) http.Server {
 		authToken := storage.CookieStore(w, r).Get(CookieName)
 		var encodedUrl, parsedUrl string
 		if authToken == "" {
-			encodedUrl, parsedUrl, _ = lnurlauth.GenerateLnUrl(fmt.Sprintf("%s/%s", host, "callback"))
+			encodedUrl, parsedUrl, _ = lnurlauth.GenerateLnUrl(fmt.Sprintf("http://%s/%s", r.Host, "callback"))
 			http.SetCookie(w, &http.Cookie{Name: CookieName, Value: parsedUrl, HttpOnly: false})
 			sessionStore.Set(ParseUrl(parsedUrl).K1, lnurlauth.SessionData{
 				LnUrl:  encodedUrl,

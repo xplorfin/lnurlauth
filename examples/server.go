@@ -20,11 +20,6 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) error
 		err                 error
 	)
 
-	serverUrl = url
-	if port != ""{
-		serverUrl = fmt.Sprintf("%s:%s", serverUrl, port)
-	}
-
 	// Setup a localTunnelListener for localtunnel
 	if localTunnels {
 		localTunnelListener, err = localtunnel.Listen(localtunnel.Options{})
@@ -32,6 +27,11 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) error
 			panic(err)
 		}
 		serverUrl = localTunnelListener.URL()
+	} else {
+		serverUrl = url
+		if port != ""{
+			serverUrl = fmt.Sprintf("%s:%s", serverUrl, port)
+		}
 	}
 
 	server = integration.GenerateServer(serverUrl)
@@ -41,10 +41,10 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) error
 	// Handle request from localtunnel
 	g.Go(func() error {
 		if localTunnels {
-			fmt.Println(fmt.Sprintf("starting server at %s", url))
+			fmt.Println(fmt.Sprintf("starting server at %s", serverUrl))
 			err = server.Serve(localTunnelListener)
 		} else {
-			fmt.Println(fmt.Sprintf("starting server at %s on port %s", url, port))
+			fmt.Println(fmt.Sprintf("starting server at %s on port %s", serverUrl, port))
 			server.Addr = fmt.Sprintf(":%s", port)
 			err = server.ListenAndServe()
 		}
