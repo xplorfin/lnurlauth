@@ -30,9 +30,9 @@ func Cmd(args []string) {
 				Value: getEnv("PORT", strconv.Itoa(freeport.GetPort())),
 			},
 			&cli.StringFlag{
-				Name:  "url",
-				Usage: "url to send callbacks from, ignored if localtunnels is set",
-				Value: getEnv("URL", "http://localhost"),
+				Name:  "hostname",
+				Usage: "hostname to start server on",
+				Value: getEnv("HOSTNAME", "localhost"),
 			},
 		},
 		Action: func(c *cli.Context) error {
