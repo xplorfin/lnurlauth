@@ -34,7 +34,7 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) error
 		}
 	}
 
-	server = integration.GenerateServer(serverUrl)
+	server = integration.GenerateServer()
 
 	g, _ := errgroup.WithContext(ctx)
 
