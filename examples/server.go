@@ -9,6 +9,7 @@ import (
 	"golang.org/x/sync/errgroup"
 	"net/http"
 	"os"
+	"strings"
 )
 
 var serverUrl = ""
@@ -30,7 +31,8 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) error
 	} else {
 		serverUrl = url
 		if port != ""{
-			serverUrl = fmt.Sprintf("%s:%s", serverUrl, port)
+			// make sure we strip any extraneous colons added by enviornment variables/users
+			serverUrl = fmt.Sprintf("%s:%s", serverUrl, strings.Replace(port, ":", "", 1))
 		}
 	}
 
