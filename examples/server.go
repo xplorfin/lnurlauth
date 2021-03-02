@@ -54,7 +54,7 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) error
 		return nil
 	})
 	g.Go(func() error {
-		fmt.Println(fmt.Sprintf("server listening on %s", url))
+		fmt.Println(fmt.Sprintf("server listening on %s", serverUrl))
 		// bypass localtunnel authorization screen for this ip
 		if open {
 			fmt.Println("attempting to open browser")
