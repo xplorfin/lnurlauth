@@ -1,8 +1,8 @@
 package lnurlauth
 
 type SessionData struct {
-	LnUrl  string `json:"ln_url"`
-	Key    string `json:"key"`
+	LnUrl string `json:"ln_url"`
+	Key   string `json:"key"`
 }
 
 // persistent store for authenticating users cross-request

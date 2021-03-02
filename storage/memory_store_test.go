@@ -17,8 +17,8 @@ func TestMemorySessionStore(t *testing.T) {
 	Nil(t, newStore.Get(key))
 
 	sessionData := lnurlauth.SessionData{
-		LnUrl:  base64.StdEncoding.EncodeToString([]byte(gofakeit.Sentence(10))),
-		Key:    gofakeit.BitcoinPrivateKey(),
+		LnUrl: base64.StdEncoding.EncodeToString([]byte(gofakeit.Sentence(10))),
+		Key:   gofakeit.BitcoinPrivateKey(),
 	}
 
 	randomKey := lnurlHelper.RandomK1()

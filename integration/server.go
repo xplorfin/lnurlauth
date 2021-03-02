@@ -72,8 +72,8 @@ func GenerateServer(host string) http.Server {
 			encodedUrl, parsedUrl, _ = lnurlauth.GenerateLnUrl(fmt.Sprintf("%s/%s", host, "callback"))
 			http.SetCookie(w, &http.Cookie{Name: CookieName, Value: parsedUrl, HttpOnly: false})
 			sessionStore.Set(ParseUrl(parsedUrl).K1, lnurlauth.SessionData{
-				LnUrl:  encodedUrl,
-				Key:    "",
+				LnUrl: encodedUrl,
+				Key:   "",
 			})
 		} else {
 			encodedUrl, _ = lnurlHelper.LNURLEncode(authToken)
@@ -103,8 +103,8 @@ func GenerateServer(host string) http.Server {
 		}
 
 		sessionStore.Set(k1, lnurlauth.SessionData{
-			LnUrl:  sessionData.LnUrl,
-			Key:    key,
+			LnUrl: sessionData.LnUrl,
+			Key:   key,
 		})
 
 		returnJson(CallbackStatus{Ok: true}, w)
