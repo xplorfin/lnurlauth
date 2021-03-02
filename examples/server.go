@@ -34,6 +34,7 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) error
 			// make sure we strip any extraneous colons added by enviornment variables/users
 			serverUrl = fmt.Sprintf("%s:%s", serverUrl, strings.Replace(port, ":", "", 1))
 		}
+		fmt.Println(serverUrl)
 	}
 
 	server = integration.GenerateServer(serverUrl)
