@@ -2,9 +2,9 @@ package integration
 
 // example response json types
 
-// provide a users current authentication status
+// AuthStatus returns the current authentication status of the user.
 type AuthStatus struct {
-	// wether or not the user is authenticated
+	// Whether or not the user is authenticated
 	IsAuthenticated bool `json:"is_authenticated"`
 }
 
