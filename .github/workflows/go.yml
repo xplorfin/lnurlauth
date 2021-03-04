@@ -16,12 +16,12 @@ jobs:
         name: Unshallow
         run: git fetch --prune --unshallow
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.34.0
+        uses: anothrNick/github-tag-action@1.35.0
         env:
           GITHUB_TOKEN: ${{ secrets.FOSS_PACKAGE_TOKEN }}
           WITH_V: true
       - name: Bump version and push tag (no v)
-        uses: anothrNick/github-tag-action@1.34.0
+        uses: anothrNick/github-tag-action@1.35.0
         env:
           GITHUB_TOKEN: ${{ secrets.FOSS_PACKAGE_TOKEN }}
           WITH_V: false
