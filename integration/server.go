@@ -13,13 +13,14 @@ import (
 	"github.com/xplorfin/lnurlauth/storage"
 )
 
-const CookieName = "lnurlAuth"
+const CookieName = "lnurlauth-token"
 
 var sessionStore storage.MemorySessionStore
 
 func ParseUrl(rawUrl string) lnurlHelper.LNURLAuthParams {
 	parsed, _ := url.Parse(rawUrl)
 	params, _ := lnurlHelper.HandleAuth(rawUrl, parsed, parsed.Query())
+
 	return params.(lnurlHelper.LNURLAuthParams)
 }
 
@@ -28,7 +29,7 @@ func isAuthenticated(w http.ResponseWriter, r *http.Request) (isAuthenticated bo
 	if authToken != "" {
 		authParams := ParseUrl(authToken)
 		if authParams.K1 != "" {
-			sessionData := sessionStore.Get(authParams.K1)
+			sessionData := sessionStore.GetK1(authParams.K1)
 			if sessionData.Key != "" {
 				isAuthenticated = true
 			}
@@ -40,6 +41,7 @@ func isAuthenticated(w http.ResponseWriter, r *http.Request) (isAuthenticated bo
 func returnJson(v interface{}, w http.ResponseWriter) {
 	res, _ := json.Marshal(v)
 	w.Header().Set("Content-Type", "application/json")
+
 	_, _ = w.Write(res)
 }
 
@@ -66,12 +68,16 @@ func GenerateServer(host string) http.Server {
 			http.Redirect(w, r, "/", 302)
 			return
 		}
+
 		authToken := storage.CookieStore(w, r).Get(CookieName)
 		var encodedUrl, parsedUrl string
+
 		if authToken == "" {
 			encodedUrl, parsedUrl, _ = lnurlauth.GenerateLnUrl(fmt.Sprintf("%s/%s", host, "callback"))
+
 			http.SetCookie(w, &http.Cookie{Name: CookieName, Value: parsedUrl, HttpOnly: false})
-			sessionStore.Set(ParseUrl(parsedUrl).K1, lnurlauth.SessionData{
+
+			sessionStore.SetK1(ParseUrl(parsedUrl).K1, lnurlauth.SessionData{
 				LnUrl: encodedUrl,
 				Key:   "",
 			})
@@ -97,12 +103,12 @@ func GenerateServer(host string) http.Server {
 			return
 		}
 
-		sessionData := sessionStore.Get(k1)
+		sessionData := sessionStore.GetK1(k1)
 		if sessionData != nil {
 			sessionData = &lnurlauth.SessionData{}
 		}
 
-		sessionStore.Set(k1, lnurlauth.SessionData{
+		sessionStore.SetK1(k1, lnurlauth.SessionData{
 			LnUrl: sessionData.LnUrl,
 			Key:   key,
 		})
