@@ -18,7 +18,7 @@ var HomeTpl = template.Must(template.New("home").Parse(`
 	{{ if . }}
 		<p> You are authenticated. To logout, go <a href="/logout"> here </a>
 	{{ else }}
-		<p> You are not authenticated. To login, go <a href="/login"> here </a>
+		<p> You are not authenticated. To login, go <a href="/login"> here. If you've re-deployed and need to clear your cookies click here: <a href="/logout">' </a>
 	{{ end }}
 </body>
 </html>
