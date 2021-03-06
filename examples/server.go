@@ -7,36 +7,32 @@ import (
 	"github.com/pkg/browser"
 	"github.com/xplorfin/lnurlauth/integration"
 	"golang.org/x/sync/errgroup"
-	"net/http"
-	"os"
 )
 
 var serverUrl = ""
 
 // start the server on a given port. If the localTunnels option is passed port and url are
 // ignored in favor of a local tunnels url produced at runtime
-func Start(ctx context.Context, localTunnels, open bool, port, url string) error {
-	var (
-		server              http.Server
-		localTunnelListener *localtunnel.Listener
-		err                 error
-	)
+func Start(ctx context.Context, localTunnels, open bool, port, url string) (err error) {
+	// local tunnels listener. Set if local tunnels is in use
+	var localTunnelListener *localtunnel.Listener
 
-	// Setup a localTunnelListener for localtunnel
 	if localTunnels {
-		localTunnelListener, err = localtunnel.Listen(localtunnel.Options{})
+		// attempt to create a local tunnels listener using cache
+		localTunnelListener, err := getLocaltunnelsListener()
 		if err != nil {
 			panic(err)
 		}
 		serverUrl = localTunnelListener.URL()
 	} else {
+		// setup server on given host and port
 		serverUrl = url
 		if port != "" {
 			serverUrl = fmt.Sprintf("%s:%s", serverUrl, port)
 		}
 	}
 
-	server = integration.GenerateServer()
+	server := integration.GenerateServer()
 
 	g, _ := errgroup.WithContext(ctx)
 
@@ -70,12 +66,4 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) error
 
 	err = g.Wait()
 	return err
-}
-
-func getEnv(configVar, defaultVar string) (result string) {
-	result = os.Getenv(configVar)
-	if result == "" {
-		return defaultVar
-	}
-	return result
 }

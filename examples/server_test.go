@@ -66,7 +66,6 @@ func RunLnUrlTests(t *testing.T, url string) {
 	True(t, runner.GetAuthStatus().IsAuthenticated)
 }
 
-// TODO come up with a cleaner way to do this
 func TestLocalTunnelsStart(t *testing.T) {
 	testWithTimeOut(t, time.After(time.Second*20), func(t *testing.T) {
 		args := os.Args[0:1]
@@ -74,13 +73,31 @@ func TestLocalTunnelsStart(t *testing.T) {
 
 		go Cmd(args)
 		for {
-			// wait till server url is set
+			// wait until server url is set
 			if serverUrl != "" {
 				RunLnUrlTests(t, serverUrl)
 				break
 			}
 			time.Sleep(time.Millisecond * 50)
 		}
-
 	})
 }
+
+//
+//func TestLocalStart(t *testing.T) {
+//	// test local tunnels caching
+//	testWithTimeOut(t, time.After(time.Second*20), func(t *testing.T) {
+//		args := os.Args[0:1]
+//		args = append(args, "-open=false" ,"-localtunnels=false")
+//
+//		go Cmd(args)
+//		for {
+//			// wait until server url is set
+//			if serverUrl != "" {
+//				RunLnUrlTests(t, serverUrl)
+//				break
+//			}
+//			time.Sleep(time.Millisecond * 50)
+//		}
+//	})
+//}
