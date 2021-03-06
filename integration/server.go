@@ -75,6 +75,15 @@ func GenerateServer() http.Server {
 		}
 		authToken := storage.CookieStore(w, r).Get(CookieName)
 		var encodedUrl, parsedUrl string
+
+		// check if the auth token actually exists in session storage. It might not if we're using an in memory storage driver
+		if authToken != ""{
+			encodedUrl, _ = lnurlHelper.LNURLEncode(authToken)
+			if sessionStore.Get(ParseUrl(parsedUrl).K1) == nil{
+				authToken = ""
+			}
+		}
+
 		if authToken == "" {
 			encodedUrl, parsedUrl, _ = lnurlauth.GenerateLnUrl(fmt.Sprintf("http://%s/%s", r.Host, "callback"))
 			http.SetCookie(w, &http.Cookie{Name: CookieName, Value: parsedUrl, HttpOnly: false})
@@ -82,8 +91,6 @@ func GenerateServer() http.Server {
 				LnUrl:  encodedUrl,
 				Key:    "",
 			})
-		} else {
-			encodedUrl, _ = lnurlHelper.LNURLEncode(authToken)
 		}
 
 		qrCode, _ := lnurlauth.GenerateQrCode(encodedUrl)
