@@ -1,76 +1,81 @@
 package main
 
 import (
+	"context"
 	"fmt"
-	"log"
-	"os"
-
 	"github.com/localtunnel/go-localtunnel"
 	"github.com/pkg/browser"
-	"github.com/urfave/cli/v2"
 	"github.com/xplorfin/lnurlauth/integration"
 	"golang.org/x/sync/errgroup"
+	"net/http"
+	"os"
 )
 
 var serverUrl = ""
 
-func Start(args []string) {
-	app := &cli.App{
-		Name:  "server",
-		Usage: "run an lnurl-auth server",
-		Flags: []cli.Flag{
-			&cli.BoolFlag{
-				Name:  "open",
-				Usage: "wether or not to open the browser",
-				Value: true,
-			},
-		},
-		Action: func(c *cli.Context) error {
-			// Setup a localTunnelListener for localtunnel
-			localTunnelListener, err := localtunnel.Listen(localtunnel.Options{})
-			if err != nil {
-				panic(err)
-			}
+// start the server on a given port. If the localTunnels option is passed port and url are
+// ignored in favor of a local tunnels url produced at runtime
+func Start(ctx context.Context, localTunnels, open bool, port, url string) error {
+	var (
+		server              http.Server
+		localTunnelListener *localtunnel.Listener
+		err                 error
+	)
 
-			g, _ := errgroup.WithContext(c.Context)
-
-			server := integration.GenerateServer(localTunnelListener.URL())
-
-			// Handle request from localtunnel
-			g.Go(func() error {
-				fmt.Println("starting server")
-
-				if err := server.Serve(localTunnelListener); err != nil {
-					panic(err)
-				}
-
-				return nil
-			})
-
-			g.Go(func() error {
-				fmt.Println(fmt.Sprintf("server listening on %s", localTunnelListener.URL()))
-
-				serverUrl = localTunnelListener.URL()
-				// bypass localtunnel authorization screen for this ip
-				fmt.Println("attempting to open browser")
-
-				if c.Bool("open") {
-					_ = browser.OpenURL(localTunnelListener.URL())
-				}
-
-				return nil
-			})
-
-			err = g.Wait()
-			return err
-		},
+	// Setup a localTunnelListener for localtunnel
+	if localTunnels {
+		localTunnelListener, err = localtunnel.Listen(localtunnel.Options{})
+		if err != nil {
+			panic(err)
+		}
+		serverUrl = localTunnelListener.URL()
+	} else {
+		serverUrl = url
+		if port != "" {
+			serverUrl = fmt.Sprintf("%s:%s", serverUrl, port)
+		}
 	}
 
-	if err := app.Run(args); err != nil {
-		log.Fatal(err)
-	}
+	server = integration.GenerateServer()
+
+	g, _ := errgroup.WithContext(ctx)
+
+	// Handle request from localtunnel
+	g.Go(func() error {
+		if localTunnels {
+			fmt.Println(fmt.Sprintf("starting server at %s", serverUrl))
+
+			err = server.Serve(localTunnelListener)
+		} else {
+			fmt.Println(fmt.Sprintf("starting server at %s on port %s", serverUrl, port))
+
+			server.Addr = serverUrl
+
+			err = server.ListenAndServe()
+		}
+		if err != nil {
+			panic(err)
+		}
+		return nil
+	})
+	g.Go(func() error {
+		fmt.Println(fmt.Sprintf("server listening on %s", serverUrl))
+		// bypass localtunnel authorization screen for this ip
+		if open {
+			fmt.Println("attempting to open browser")
+			_ = browser.OpenURL(serverUrl)
+		}
+		return nil
+	})
+
+	err = g.Wait()
+	return err
 }
 
-func main() {
-	Start(os.Args)
+func getEnv(configVar, defaultVar string) (result string) {
+	result = os.Getenv(configVar)
+	if result == "" {
+		return defaultVar
+	}
+	return result
 }

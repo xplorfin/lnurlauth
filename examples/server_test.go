@@ -27,7 +27,7 @@ func testWithTimeOut(t *testing.T, timeout <-chan time.Time, testFunc func(t *te
 
 	select {
 	case <-timeout:
-		t.Fatal("test didn'tester finish in time")
+		t.Fatal("tester didn't finish in time")
 	case <-done:
 	}
 }
@@ -72,7 +72,7 @@ func TestLocalTunnelsStart(t *testing.T) {
 		args := os.Args[0:1]
 		args = append(args, "-open=false")
 
-		go Start(args)
+		go Cmd(args)
 		for {
 			// wait till server url is set
 			if serverUrl != "" {

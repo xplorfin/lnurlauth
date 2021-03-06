@@ -8,6 +8,7 @@ type AuthStatus struct {
 	IsAuthenticated bool `json:"is_authenticated"`
 }
 
+// CallbackStatus returns whether or not a callback was successful to a ln wallet
 type CallbackStatus struct {
 	Ok bool `json:"ok"`
 }

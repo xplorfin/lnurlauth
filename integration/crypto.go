@@ -20,7 +20,6 @@ func signMessage(k1 string) (params SignedMessage, err error) {
 		"20ee63e502ee2869afab7de234b80c")
 
 	if err != nil {
-		// fmt.Println(err)
 		return
 	}
 
