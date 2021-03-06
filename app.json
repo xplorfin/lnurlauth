@@ -1,7 +1,7 @@
 {
   "name": "LNUrl Auth Example",
   "description": "LNUrl auth example",
-  "repository": "https://github.com/xplorfin/lnurlauth",
+  "repository": "https://raw.githubusercontent.com/jakesyl/lnurlauth/master/assets/logo.png",
   "logo": "assets/logo.png",
   "keywords": ["golang", "lightning", "lnurlauth"],
   "env": {
