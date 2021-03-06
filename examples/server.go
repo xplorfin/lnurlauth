@@ -28,8 +28,8 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) (err 
 		// setup server on given host and port
 		serverUrl = url
 		if port != "" {
-			url = fmt.Sprintf("%s:%s", serverUrl, port)
-			serverUrl = fmt.Sprintf("http://%s", url)
+			url = fmt.Sprintf(":%s", port)
+			serverUrl = fmt.Sprintf("http://%s:%s", "localhost", url)
 		}
 	}
 
