@@ -100,7 +100,7 @@ func GenerateServer() http.Server {
 		key, k1, err := lnurlauth.Authenticate(r)
 		if err != nil {
 			w.WriteHeader(400)
-			w.Write([]byte(err.Error()))
+			returnJson(CallbackStatus{Ok: false}, w)
 			return
 		}
 
