@@ -58,7 +58,6 @@ func GenerateServer() http.Server {
 
 	// redirect to login page
 	res.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("local")
 		ok := isAuthenticated(w, r)
 		HomeTpl.Execute(w, ok)
 	})

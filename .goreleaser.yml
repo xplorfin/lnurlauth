@@ -1,7 +1,42 @@
-project_name: lnurlauth
+project_name: lnurl-auth-project
+builds:
+  -
+    id: example
+    main: ./examples/main.go
+    binary: main
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm
+      - arm64
+    goarm:
+      - 6
+      - 7
+  -
+    env:
+      - CGO_ENABLED=0
+dockers:
+  - binaries:
+      - main
+    image_templates:
+      - "ghcr.io/xplorfin/lnurlauth/lnurlauth:{{ .Tag }}"
+      - "ghcr.io/xplorfin/lnurlauth/lnurlauth:latest"
+    # extra_files: #any other files you need go in here.
+    goos: linux
+    dockerfile: docker/Dockerfile.deploy
+    goarch: amd64
+    goarm: ''
 
-build:
-  skip: true
+archives:
+  -
+    replacements:
+      '386': i386
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      amd64: x86_64
 checksum:
   name_template: checksums.txt
 snapshot:
