@@ -69,12 +69,6 @@ func GenerateServer() http.Server {
 		}
 		authToken := storage.CookieStore(w, r).Get(CookieName)
 		var encodedUrl, parsedUrl string
-		for name, values := range r.Header {
-			// Loop over all values for the name.
-			for _, value := range values {
-				fmt.Println(name, value)
-			}
-		}
 		if authToken == "" {
 			encodedUrl, parsedUrl, _ = lnurlauth.GenerateLnUrl(fmt.Sprintf("http://%s/%s", r.Host, "callback"))
 			http.SetCookie(w, &http.Cookie{Name: CookieName, Value: parsedUrl, HttpOnly: false})
