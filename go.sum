@@ -4,6 +4,7 @@ github.com/Flaque/filet v0.0.0-20201012163910-45f684403088/go.mod h1:TK+jB3mBs+8
 github.com/Pallinder/go-randomdata v1.2.0 h1:DZ41wBchNRb/0GfsePLiSwb0PHZmT67XY00lCDlaYPg=
 github.com/Pallinder/go-randomdata v1.2.0/go.mod h1:yHmJgulpD2Nfrm0cR9tI/+oAgRqCQQixsA8HyRZfV9Y=
 github.com/aead/siphash v1.0.1/go.mod h1:Nywa3cDsYNNK3gaciGTWPwHt0wlpNV15vwmswBAUSII=
+github.com/andybalholm/brotli v1.0.0/go.mod h1:loMXtMfwqflxFJPmdbJO0a3KNoPuLBgiu3qAvBg8x/Y=
 github.com/andybalholm/brotli v1.0.1 h1:KqhlKozYbRtJvsPrrEeXcO+N2l6NYT5A2QAFmSULpEc=
 github.com/andybalholm/brotli v1.0.1/go.mod h1:loMXtMfwqflxFJPmdbJO0a3KNoPuLBgiu3qAvBg8x/Y=
 github.com/brianvoe/gofakeit/v5 v5.11.2 h1:Ny5Nsf4z2023ZvYP8ujW8p5B1t5sxhdFaQ/0IYXbeSA=
@@ -30,6 +31,8 @@ github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSs
 github.com/decred/dcrd/lru v1.0.0/go.mod h1:mxKOwFd7lFjN2GZYsiz/ecgqR6kkYAl+0pz0tEMk218=
 github.com/fasthttp/router v1.3.9 h1:/V71/6mBpH8oohAaR/DtBB4el6EETbNsBPBoCJZc4gc=
 github.com/fasthttp/router v1.3.9/go.mod h1:hKaPPZT9HWA/bEs1pSIbofAxZCLz3oPNTHtn/xqw6j0=
+github.com/fasthttp/router v1.3.8 h1:2ByFINIskXMu8aim/JmZ8WPU7FD4FjaXdUE/tBoAgDI=
+github.com/fasthttp/router v1.3.8/go.mod h1:DQBvuHvYbn3SUN6pGjwjPbpCNpWfCFc5Ipn/Fj6XxFc=
 github.com/fiatjaf/go-lnurl v1.3.0 h1:uqYCiybQ0uzfYGLj7PVtbO9BrXUM3wVbCQrobXAx+Zk=
 github.com/fiatjaf/go-lnurl v1.3.0/go.mod h1:BqA8WXAOzntF7Z3EkVO7DfP4y5rhWUmJ/Bu9KBke+rs=
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
@@ -58,6 +61,7 @@ github.com/jrick/logrotate v1.0.0/go.mod h1:LNinyqDIJnpAur+b8yyulnQw/wDuN1+BYKlT
 github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 h1:uC1QfSlInpQF+M0ao65imhwqKnz3Q2z/d8PWZRMQvDM=
 github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88/go.mod h1:3w7q1U84EfirKl04SVQ/s7nPm1ZPhiXd34z40TNz36k=
 github.com/kkdai/bstream v0.0.0-20161212061736-f391b8402d23/go.mod h1:J+Gs4SYgM6CZQHDETBtE9HaSEkGmuNXF86RwHhHUvq4=
+github.com/klauspost/compress v1.10.7/go.mod h1:aoV0uJVorq1K+umq18yTdKaF57EivdYsUV+/s2qKfXs=
 github.com/klauspost/compress v1.11.8 h1:difgzQsp5mdAz9v8lm3P/I+EpDKMU/6uTMw1y1FObuo=
 github.com/klauspost/compress v1.11.8/go.mod h1:aoV0uJVorq1K+umq18yTdKaF57EivdYsUV+/s2qKfXs=
 github.com/kr/fs v0.1.0/go.mod h1:FFnZGqtBN9Gxj7eW1uZ42v5BccTP0vu6NEaFoC2HwRg=
@@ -125,6 +129,12 @@ github.com/valyala/fasthttp v1.22.0/go.mod h1:0mw2RjXGOzxf4NL2jni3gUQ7LfjjUSiG5s
 github.com/valyala/tcplisten v0.0.0-20161114210144-ceec8f93295a/go.mod h1:v3UYOV9WzVtRmSR+PDvWpU/qWl4Wa5LApYYX4ZtKbio=
 github.com/xplorfin/netutils v0.21.0 h1:+UkpoysX+t/aNcY6H6CJGVZMNj6rYf8XdUj2QSmMw5o=
 github.com/xplorfin/netutils v0.21.0/go.mod h1:2dfFzI8bQH46AJ05vrpPpL2stupmNOmuH6X+LuPxUzo=
+github.com/valyala/fasthttp v1.21.0/go.mod h1:jjraHZVbKOXftJfsOYoAjaeygpj5hr8ermTRJNroD7A=
+github.com/valyala/fasthttp v1.22.0 h1:OpwH5KDOJ9cS2bq8fD+KfT4IrksK0llvkHf4MZx42jQ=
+github.com/valyala/fasthttp v1.22.0/go.mod h1:0mw2RjXGOzxf4NL2jni3gUQ7LfjjUSiG5sskOUUSEpU=
+github.com/valyala/tcplisten v0.0.0-20161114210144-ceec8f93295a/go.mod h1:v3UYOV9WzVtRmSR+PDvWpU/qWl4Wa5LApYYX4ZtKbio=
+github.com/xplorfin/netutils v0.19.0 h1:2XZlFsOhp0vd3GnOsHgqtvAicDRbZxXsTK0zYhKZimI=
+github.com/xplorfin/netutils v0.19.0/go.mod h1:lI/5GbBBdIt/LjtwVmA/Z+5KiweECPIBaLax5pSRy04=
 github.com/yudai/gojsondiff v1.0.0 h1:27cbfqXLVEJ1o8I6v3y9lg8Ydm53EKqHXAOMxEGlCOA=
 github.com/yudai/gojsondiff v1.0.0/go.mod h1:AY32+k2cwILAkW1fbgxQ5mUmMiZFgLIV+FBNExI05xg=
 github.com/yudai/golcs v0.0.0-20170316035057-ecda9a501e82 h1:BHyfKlQyqbsFN5p3IfnEUduWvb9is428/nNb5L3U01M=

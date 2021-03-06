@@ -13,10 +13,13 @@ import (
 	"github.com/xplorfin/lnurlauth/storage"
 )
 
+// the cookie name stored int he users browser
 const CookieName = "lnurlauth-token"
 
+// the session store we mock for testing
 var sessionStore storage.MemorySessionStore
 
+// parses a url into auth params
 func ParseUrl(rawUrl string) lnurlHelper.LNURLAuthParams {
 	parsed, _ := url.Parse(rawUrl)
 	params, _ := lnurlHelper.HandleAuth(rawUrl, parsed, parsed.Query())
@@ -24,10 +27,13 @@ func ParseUrl(rawUrl string) lnurlHelper.LNURLAuthParams {
 	return params.(lnurlHelper.LNURLAuthParams)
 }
 
+// determine wether or not a user is authenticated from their request
 func isAuthenticated(w http.ResponseWriter, r *http.Request) (isAuthenticated bool) {
 	authToken := storage.CookieStore(w, r).Get(CookieName)
+	// if auth tokens not set user is not authenticated
 	if authToken != "" {
 		authParams := ParseUrl(authToken)
+		// if k1 is not set, we have nothing to authenticate against
 		if authParams.K1 != "" {
 			sessionData := sessionStore.GetK1(authParams.K1)
 			if sessionData.Key != "" {
@@ -38,6 +44,7 @@ func isAuthenticated(w http.ResponseWriter, r *http.Request) (isAuthenticated bo
 	return isAuthenticated
 }
 
+// return a json response
 func returnJson(v interface{}, w http.ResponseWriter) {
 	res, _ := json.Marshal(v)
 	w.Header().Set("Content-Type", "application/json")
@@ -45,7 +52,8 @@ func returnJson(v interface{}, w http.ResponseWriter) {
 	_, _ = w.Write(res)
 }
 
-func GenerateServer(host string) http.Server {
+// generate a server object
+func GenerateServer() http.Server {
 	res := http.NewServeMux()
 
 	// redirect to login page
@@ -62,6 +70,11 @@ func GenerateServer(host string) http.Server {
 		returnJson(status, w)
 	})
 
+	res.HandleFunc("/logout", func(w http.ResponseWriter, r *http.Request) {
+		storage.CookieStore(w, r).Remove(CookieName)
+		http.Redirect(w, r, "/", 302)
+	})
+
 	// redirect to login page
 	res.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
 		if isAuthenticated(w, r) {
@@ -72,17 +85,22 @@ func GenerateServer(host string) http.Server {
 		authToken := storage.CookieStore(w, r).Get(CookieName)
 		var encodedUrl, parsedUrl string
 
-		if authToken == "" {
-			encodedUrl, parsedUrl, _ = lnurlauth.GenerateLnUrl(fmt.Sprintf("%s/%s", host, "callback"))
+		// check if the auth token actually exists in session storage. It might not if we're using an in memory storage driver
+		if authToken != "" {
+			encodedUrl, _ = lnurlHelper.LNURLEncode(authToken)
+			if sessionStore.GetK1(ParseUrl(parsedUrl).K1) == nil {
+				authToken = ""
+			}
+		}
 
+		if authToken == "" {
+			encodedUrl, parsedUrl, _ = lnurlauth.GenerateLnUrl(fmt.Sprintf("http://%s/%s", r.Host, "callback"))
 			http.SetCookie(w, &http.Cookie{Name: CookieName, Value: parsedUrl, HttpOnly: false})
 
 			sessionStore.SetK1(ParseUrl(parsedUrl).K1, lnurlauth.SessionData{
 				LnUrl: encodedUrl,
 				Key:   "",
 			})
-		} else {
-			encodedUrl, _ = lnurlHelper.LNURLEncode(authToken)
 		}
 
 		qrCode, _ := lnurlauth.GenerateQrCode(encodedUrl)
@@ -91,7 +109,7 @@ func GenerateServer(host string) http.Server {
 		LoginPage.Execute(w, LoginPageData{
 			Encoded:   encodedUrl,
 			DataUri:   template.URL(fmt.Sprintf("data:image/png;base64,%s", qrString)),
-			CancelUrl: "",
+			LogoutUrl: "",
 		})
 	})
 
@@ -99,7 +117,7 @@ func GenerateServer(host string) http.Server {
 		key, k1, err := lnurlauth.Authenticate(r)
 		if err != nil {
 			w.WriteHeader(400)
-			w.Write([]byte(err.Error()))
+			returnJson(CallbackStatus{Ok: false}, w)
 			return
 		}
 

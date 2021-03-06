@@ -1,0 +1,13 @@
+{
+  "name": "LNUrl Auth Example",
+  "description": "LNUrl auth example",
+  "repository": "https://github.com/xplorfin/lnurlauth",
+  "logo": "https://raw.githubusercontent.com/xplorfin/lnurlauth/master/assets/logo.png",
+  "keywords": ["golang", "lightning", "lnurlauth", "bitcoin"],
+  "env": {
+    "GOVERSION": {
+      "description": "Go version. This must be explicitly specified in heroku, see https://git.io/Jtx7m for details",
+      "value": "1.15"
+    }
+  }
+}
