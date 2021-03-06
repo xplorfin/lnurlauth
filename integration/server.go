@@ -61,6 +61,12 @@ func GenerateServer() http.Server {
 		returnJson(status, w)
 	})
 
+	res.HandleFunc("/logout", func(w http.ResponseWriter, r *http.Request) {
+		storage.CookieStore(w, r).Remove(CookieName)
+		http.Redirect(w, r, "/", 302)
+	})
+
+
 	// redirect to login page
 	res.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
 		if isAuthenticated(w, r) {
