@@ -6,7 +6,7 @@ import (
 	"github.com/xplorfin/lnurlauth"
 )
 
-// implements the request store interface and
+// CookieRequestStore implements the request store interface and
 // stores data in cookies using net/http
 type CookieRequestStore struct {
 	Writer  http.ResponseWriter
@@ -32,10 +32,8 @@ func (c CookieRequestStore) Get(name string) string {
 	return storedData.Value
 }
 
-func (c *CookieRequestStore) Remove(name string) string {
-	storedValue := c.Get(name)
+func (c *CookieRequestStore) Remove(name string) {
 	http.SetCookie(c.Writer, &http.Cookie{Name: name, MaxAge: -1, Value: ""})
-	return storedValue
 }
 
 var _ lnurlauth.RequestStore = &CookieRequestStore{}

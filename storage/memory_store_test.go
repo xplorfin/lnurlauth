@@ -14,20 +14,19 @@ func TestMemorySessionStore(t *testing.T) {
 	newStore := MemorySessionStore{}
 
 	key := gofakeit.Word()
-	Nil(t, newStore.Get(key))
+	Nil(t, newStore.GetK1(key))
 
 	sessionData := lnurlauth.SessionData{
-		LnUrl:  base64.StdEncoding.EncodeToString([]byte(gofakeit.Sentence(10))),
-		RawUrl: gofakeit.URL(),
-		Key:    gofakeit.BitcoinPrivateKey(),
+		LnUrl: base64.StdEncoding.EncodeToString([]byte(gofakeit.Sentence(10))),
+		Key:   gofakeit.BitcoinPrivateKey(),
 	}
 
 	randomKey := lnurlHelper.RandomK1()
-	newStore.Set(randomKey, sessionData)
+	newStore.SetK1(randomKey, sessionData)
 
-	res := newStore.Get(randomKey)
+	res := newStore.GetK1(randomKey)
 	Equal(t, res, &sessionData)
 
-	newStore.Remove(randomKey)
-	Nil(t, newStore.Get(key))
+	newStore.RemoveK1(randomKey)
+	Nil(t, newStore.GetK1(key))
 }
