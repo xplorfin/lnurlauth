@@ -8,6 +8,7 @@ import (
 	"strconv"
 )
 
+// run the app
 func Cmd(args []string) {
 	app := &cli.App{
 		Name:  "server",
@@ -15,7 +16,7 @@ func Cmd(args []string) {
 		Flags: []cli.Flag{
 			&cli.BoolFlag{
 				Name:  "open",
-				Usage: "wether or not to open the browser",
+				Usage: "whether or not to open the browser",
 				Value: true,
 			},
 			&cli.BoolFlag{
@@ -35,7 +36,7 @@ func Cmd(args []string) {
 			},
 		},
 		Action: func(c *cli.Context) error {
-			return Start(c.Context, c.Bool("localtunnels"), c.Bool("open"), c.String("port"), c.String("url"))
+			return Start(c.Context, c.Bool("localtunnels"), c.Bool("open"), c.String("port"), c.String("hostname"))
 		},
 	}
 	err := app.Run(args)

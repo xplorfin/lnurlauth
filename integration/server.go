@@ -13,10 +13,13 @@ import (
 	"github.com/xplorfin/lnurlauth/storage"
 )
 
+// the cookie name stored int he users browser
 const CookieName = "lnurlauth-token"
 
+// the session store we mock for testing
 var sessionStore storage.MemorySessionStore
 
+// parses a url into auth params
 func ParseUrl(rawUrl string) lnurlHelper.LNURLAuthParams {
 	parsed, _ := url.Parse(rawUrl)
 	params, _ := lnurlHelper.HandleAuth(rawUrl, parsed, parsed.Query())
@@ -24,6 +27,7 @@ func ParseUrl(rawUrl string) lnurlHelper.LNURLAuthParams {
 	return params.(lnurlHelper.LNURLAuthParams)
 }
 
+// determine wether or not a user is authenticated from their request
 func isAuthenticated(w http.ResponseWriter, r *http.Request) (isAuthenticated bool) {
 	authToken := storage.CookieStore(w, r).Get(CookieName)
 	// if auth tokens not set user is not authenticated
@@ -40,6 +44,7 @@ func isAuthenticated(w http.ResponseWriter, r *http.Request) (isAuthenticated bo
 	return isAuthenticated
 }
 
+// return a json response
 func returnJson(v interface{}, w http.ResponseWriter) {
 	res, _ := json.Marshal(v)
 	w.Header().Set("Content-Type", "application/json")
@@ -47,6 +52,7 @@ func returnJson(v interface{}, w http.ResponseWriter) {
 	_, _ = w.Write(res)
 }
 
+// generate a server object
 func GenerateServer() http.Server {
 	res := http.NewServeMux()
 
@@ -104,7 +110,7 @@ func GenerateServer() http.Server {
 		LoginPage.Execute(w, LoginPageData{
 			Encoded:   encodedUrl,
 			DataUri:   template.URL(fmt.Sprintf("data:image/png;base64,%s", qrString)),
-			CancelUrl: "",
+			LogoutUrl: "",
 		})
 	})
 

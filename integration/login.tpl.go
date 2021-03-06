@@ -2,15 +2,17 @@ package integration
 
 import "html/template"
 
+// data passed to the login page
 type LoginPageData struct {
 	// encoded lnurl string
 	Encoded string
 	// data uri string
 	DataUri template.URL
-	// cancel url
-	CancelUrl string
+	// logout url
+	LogoutUrl string
 }
 
+// the home page template
 var HomeTpl = template.Must(template.New("home").Parse(`
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +26,7 @@ var HomeTpl = template.Must(template.New("home").Parse(`
 </html>
 `))
 
+// the login page template
 var LoginPage = template.Must(template.New("login").Parse(`
 <!DOCTYPE html>
 <html lang="en">
@@ -103,8 +106,8 @@ var LoginPage = template.Must(template.New("login").Parse(`
 			<p>Scan the QR code with an app that supports lnurl-auth</p>
 			<a id="qrcode" href="lightning:{{.Encoded}}"><img src="{{.DataUri}}"></a>
 			<div id="buttons">
-				{{if .CancelUrl }}
-					<a href="{{.CancelUrl}}" class="button">Cancel</a>
+				{{if .LogoutUrl }}
+					<a href="{{.LogoutUrl}}" class="button">Cancel</a>
 				{{end}}
 			</div>
 		</div>
