@@ -7,7 +7,7 @@
 
 # LN Url
 
-A golang lnurl example implementation by [entropy](https://entropy.rocks). This library is meant to demonstrate a service conforming to the [lnurl-auth](https://github.com/fiatjaf/lnurl-rfc/blob/master/lnurl-auth.md) standard and provide canonical ways of authenticating with lnurl auth. This library is based on [passport-ln-url-auth](https://github.com/chill117/passport-lnurl-auth) and utilizes [go-lnurl](https://github.com/fiatjaf/go-lnurl).
+A golang lnurl example implementation by [entropy](https://entropy.rocks). This library is meant to demonstrate a service conforming to the [lnurl-auth](https://github.com/fiatjaf/lnurl-rfc/blob/master/lnurl-auth.md) standard and provide canonical ways of authenticating with lnurl auth. This library is based on [passport-ln-url-auth](https://github.com/chill117/passport-lnurl-auth) and utilizes [go-lnurl](https://github.com/fiatjaf/go-lnurl). You can see a live demo [here](https://lnurlauth.herokuapp.com/)
 
 # Getting Started:
 
