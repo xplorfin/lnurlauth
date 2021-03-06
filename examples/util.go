@@ -13,12 +13,12 @@ import (
 // generate a new local tunnel listener, store to file
 func newLocalTunnelListener(f *os.File) (listener *localtunnel.Listener, err error) {
 	listener, err = localtunnel.Listen(localtunnel.Options{})
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
 	rawUrl := listener.URL()
 	u, err := url.Parse(rawUrl)
-	if err != nil{
+	if err != nil {
 		log.Println("we failed to store listener url in cache")
 		return listener, nil
 	}
@@ -29,7 +29,6 @@ func newLocalTunnelListener(f *os.File) (listener *localtunnel.Listener, err err
 	}
 	return listener, err
 }
-
 
 // since local tunnels has a phishing warning on every new domain (see: https://bit.ly/3kSn6Yp)
 // we want to use the same domain from previous startups if we can
@@ -50,7 +49,7 @@ func getLocaltunnelsListener() (listener *localtunnel.Listener, err error) {
 
 	// read the contents of the local tunnels file for a subdomian
 	contents, err := ioutil.ReadAll(f)
-	if err != nil{
+	if err != nil {
 		return newLocalTunnelListener(f)
 	}
 
@@ -65,7 +64,7 @@ func getLocaltunnelsListener() (listener *localtunnel.Listener, err error) {
 			MaxConnections: 0,
 			Log:            nil,
 		})
-		if err != nil{
+		if err != nil {
 			log.Println(err)
 			// if we can't, create a new listener and attempt to persist for next time
 			return newLocalTunnelListener(f)
@@ -73,7 +72,6 @@ func getLocaltunnelsListener() (listener *localtunnel.Listener, err error) {
 	}
 	return listener, err
 }
-
 
 func getEnv(configVar, defaultVar string) (result string) {
 	result = os.Getenv(configVar)

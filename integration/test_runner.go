@@ -11,10 +11,14 @@ import (
 	. "github.com/stretchr/testify/assert"
 )
 
+// helper methods
 type TestRunner struct {
+	// http client to use for tests
 	Client *http.Client
+	// testing object to report errors to
 	Tester *testing.T
-	Url    string
+	// base url to test against
+	Url string
 }
 
 // get a given route with a bypass header for local tunnels
@@ -28,6 +32,7 @@ func (t TestRunner) Get(route string) *http.Response {
 	return res
 }
 
+// retreive the users authentication status
 func (t TestRunner) GetAuthStatus() AuthStatus {
 	authStatus := AuthStatus{}
 	res := t.Get("is-authenticated")

@@ -19,7 +19,7 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) (err 
 
 	if localTunnels {
 		// attempt to create a local tunnels listener using cache
-		localTunnelListener, err := getLocaltunnelsListener()
+		localTunnelListener, err = getLocaltunnelsListener()
 		if err != nil {
 			panic(err)
 		}
@@ -28,7 +28,8 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) (err 
 		// setup server on given host and port
 		serverUrl = url
 		if port != "" {
-			serverUrl = fmt.Sprintf("%s:%s", serverUrl, port)
+			url = fmt.Sprintf("%s:%s", serverUrl, port)
+			serverUrl = fmt.Sprintf("http://%s", url)
 		}
 	}
 
@@ -45,7 +46,7 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) (err 
 		} else {
 			fmt.Println(fmt.Sprintf("starting server at %s on port %s", serverUrl, port))
 
-			server.Addr = serverUrl
+			server.Addr = url
 
 			err = server.ListenAndServe()
 		}
