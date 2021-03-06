@@ -21,4 +21,19 @@ If you'd like to run this library locally, you can run `examples/main.go --help`
  
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/xplorfin/lnurlauth)
 
-2. 
+2. Enter an available app name and hit deploy:
+
+![](assets/step-1.png)
+
+
+3. Wait for the deploy to finish
+
+![](assets/step-2.png)
+
+4. Visit your app
+
+![](assets/step-3.png)
+
+5. Now you should be able to authenticate using a lightning wallet such as [breez](https://breez.technology/):
+
+![](assets/step-4.gif)
