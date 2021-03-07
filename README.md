@@ -13,7 +13,7 @@ A golang lnurl example implementation by [entropy](https://entropy.rocks). This 
 
 ## Running Locally:
 
-If you'd like to run this library locally, you can run `examples/main.go --help`. Alternatively, we provide docker and binary files [here](https://github.com/xplorfin/lnurlauth/releases). If you run with `--localtunnels=false` and your wallet is on another device, you will be unable to authenticate. We enable localtunnels by default
+If you'd like to run this library locally, you can run `examples/main.go --help`.  If you run with `--localtunnels=false` and your wallet is on another device, you will be unable to authenticate. We enable localtunnels by default
 
 ## Running on Heroku:
 
