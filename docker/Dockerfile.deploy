@@ -1,0 +1,6 @@
+FROM alpine:latest
+COPY main /
+# see https://stackoverflow.com/a/50861580/1011803
+RUN apk add --no-cache libc6-compat
+RUN apk --no-cache add bash #For debugging
+CMD ["/main"]
