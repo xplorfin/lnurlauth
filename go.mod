@@ -3,7 +3,7 @@ module github.com/xplorfin/lnurlauth
 go 1.15
 
 require (
-	github.com/brianvoe/gofakeit/v6 v6.2.2
+	github.com/brianvoe/gofakeit/v5 v5.11.2
 	github.com/btcsuite/btcd v0.21.0-beta
 	github.com/fiatjaf/go-lnurl v1.3.0
 	github.com/localtunnel/go-localtunnel v0.0.0-20170326223115-8a804488f275
