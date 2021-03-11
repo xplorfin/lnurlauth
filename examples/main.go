@@ -1,11 +1,12 @@
 package main
 
 import (
-	"github.com/phayes/freeport"
-	"github.com/urfave/cli/v2"
 	"log"
 	"os"
 	"strconv"
+
+	"github.com/phayes/freeport"
+	"github.com/urfave/cli/v2"
 )
 
 // run the app

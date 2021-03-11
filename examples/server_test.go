@@ -2,15 +2,16 @@ package main
 
 import (
 	"encoding/json"
-	. "github.com/stretchr/testify/assert"
-	"github.com/xplorfin/lnurlauth/integration"
-	"github.com/xplorfin/netutils/testutils"
-	"golang.org/x/net/publicsuffix"
 	"net/http"
 	"net/http/cookiejar"
 	"os"
 	"testing"
 	"time"
+
+	. "github.com/stretchr/testify/assert"
+	"github.com/xplorfin/lnurlauth/integration"
+	"github.com/xplorfin/netutils/testutils"
+	"golang.org/x/net/publicsuffix"
 )
 
 // run test with a timeout

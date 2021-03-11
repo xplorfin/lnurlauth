@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+
 	"github.com/localtunnel/go-localtunnel"
 	"github.com/pkg/browser"
 	"github.com/xplorfin/lnurlauth/integration"
@@ -40,11 +41,11 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) (err 
 	// Handle request from localtunnel
 	g.Go(func() error {
 		if localTunnels {
-			fmt.Println(fmt.Sprintf("starting server at %s", serverUrl))
+			fmt.Printf("starting server at %s", serverUrl)
 
 			err = server.Serve(localTunnelListener)
 		} else {
-			fmt.Println(fmt.Sprintf("starting server at %s on port %s", serverUrl, port))
+			fmt.Printf("starting server at %s on port %s", serverUrl, port)
 
 			server.Addr = url
 
@@ -56,7 +57,7 @@ func Start(ctx context.Context, localTunnels, open bool, port, url string) (err 
 		return nil
 	})
 	g.Go(func() error {
-		fmt.Println(fmt.Sprintf("server listening on %s", serverUrl))
+		fmt.Printf("server listening on %s", serverUrl)
 		// bypass localtunnel authorization screen for this ip
 		if open {
 			fmt.Println("attempting to open browser")

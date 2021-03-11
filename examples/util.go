@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/localtunnel/go-localtunnel"
 	"io/ioutil"
 	"log"
 	"net/url"
 	"os"
 	"strings"
+
+	"github.com/localtunnel/go-localtunnel"
 )
 
 // generate a new local tunnel listener, store to file
