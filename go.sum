@@ -124,8 +124,8 @@ github.com/valyala/bytebufferpool v1.0.0/go.mod h1:6bBcMArwyJ5K/AmCkWv1jt77kVWyC
 github.com/valyala/fasthttp v1.22.0 h1:OpwH5KDOJ9cS2bq8fD+KfT4IrksK0llvkHf4MZx42jQ=
 github.com/valyala/fasthttp v1.22.0/go.mod h1:0mw2RjXGOzxf4NL2jni3gUQ7LfjjUSiG5sskOUUSEpU=
 github.com/valyala/tcplisten v0.0.0-20161114210144-ceec8f93295a/go.mod h1:v3UYOV9WzVtRmSR+PDvWpU/qWl4Wa5LApYYX4ZtKbio=
-github.com/xplorfin/netutils v0.21.0 h1:+UkpoysX+t/aNcY6H6CJGVZMNj6rYf8XdUj2QSmMw5o=
-github.com/xplorfin/netutils v0.21.0/go.mod h1:2dfFzI8bQH46AJ05vrpPpL2stupmNOmuH6X+LuPxUzo=
+github.com/xplorfin/netutils v0.24.0 h1:Nmvp7d14EY0d/WlwW09oKpqWnhvGU7/DPATVOv23DEQ=
+github.com/xplorfin/netutils v0.24.0/go.mod h1:2dfFzI8bQH46AJ05vrpPpL2stupmNOmuH6X+LuPxUzo=
 github.com/yudai/gojsondiff v1.0.0 h1:27cbfqXLVEJ1o8I6v3y9lg8Ydm53EKqHXAOMxEGlCOA=
 github.com/yudai/gojsondiff v1.0.0/go.mod h1:AY32+k2cwILAkW1fbgxQ5mUmMiZFgLIV+FBNExI05xg=
 github.com/yudai/golcs v0.0.0-20170316035057-ecda9a501e82 h1:BHyfKlQyqbsFN5p3IfnEUduWvb9is428/nNb5L3U01M=
