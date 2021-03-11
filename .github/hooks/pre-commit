@@ -1,0 +1,46 @@
+#!/bin/sh
+
+CHANGED_FILES=$(git diff --cached --diff-filter=ACMR --name-only)
+
+## Stash unstaged changes, but keep the current index
+### Modified files in WD should be those of INDEX (v. A), everything else HEAD
+### Stashed was the WD of the original state (v. B)
+
+git stash save -q --keep-index "current wd"
+
+## script for editing project files
+### This is editing your original staged files version (v. A), since this is your WD
+### (call changed files v. A')
+
+GOCHANGES=false
+
+# ascertain wether or not any go files changed
+if [ -n "${CHANGED_FILES}" ]; then
+    for STAGED_FILE in $CHANGED_FILES; do
+        filename=$(basename -- "$STAGED_FILE")
+        extension="${filename##*.}"
+        if [ $extension == "go" ] && [ $filename != "go.mod" ] && [ $filename != "go.sum" ]; then
+            GOCHANGES=true
+        fi
+    done
+fi
+
+if [ $GOCHANGES ]; then
+    make lint
+fi
+
+
+## Check for exit errors of your_script.sh; on errors revert to original state
+## (index has v. A and WD has v. B)
+
+RESULT=$?
+if [ $RESULT -ne 0 ]; then
+git stash save -q "original index"
+git stash apply -q --index stash@{1}
+git stash drop -q; git stash drop -q
+fi
+[ $RESULT -ne 0 ] && exit 1
+
+## Stage your_script.sh modified files (v. A')
+
+git add -u
