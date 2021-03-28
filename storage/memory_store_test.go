@@ -29,4 +29,10 @@ func TestMemorySessionStore(t *testing.T) {
 
 	newStore.RemoveK1(randomKey)
 	Nil(t, newStore.GetK1(key))
+
+	newStore.SetJwt(key, sessionData)
+	res = newStore.GetJwt(key)
+	Equal(t, res, &sessionData)
+
+	newStore.RemoveJwt(key)
 }
