@@ -33,8 +33,6 @@ github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSs
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/decred/dcrd/lru v1.0.0/go.mod h1:mxKOwFd7lFjN2GZYsiz/ecgqR6kkYAl+0pz0tEMk218=
-github.com/dgrijalva/jwt-go v3.2.0+incompatible h1:7qlOGliEKZXTDg6OTjfoBKDXWrumCAMpl/TFQ4/5kLM=
-github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
 github.com/fasthttp/router v1.3.10 h1:bWFTVau1WjRZMZ8R7btuMAQY0biADNRoWKYeHRLLGAk=
 github.com/fasthttp/router v1.3.10/go.mod h1:hKaPPZT9HWA/bEs1pSIbofAxZCLz3oPNTHtn/xqw6j0=
 github.com/fiatjaf/go-lnurl v1.3.1 h1:9Qn4n1ZyzTMW/YuVX2Wr9cE+LEAzpE1hrCbxVK/yBKE=
@@ -135,11 +133,13 @@ github.com/valyala/bytebufferpool v1.0.0 h1:GqA5TC/0021Y/b9FG4Oi9Mr3q7XYx6Kllzaw
 github.com/valyala/bytebufferpool v1.0.0/go.mod h1:6bBcMArwyJ5K/AmCkWv1jt77kVWyCJ6HpOuEn7z0Csc=
 github.com/valyala/fasthttp v1.22.0 h1:OpwH5KDOJ9cS2bq8fD+KfT4IrksK0llvkHf4MZx42jQ=
 github.com/valyala/fasthttp v1.22.0/go.mod h1:0mw2RjXGOzxf4NL2jni3gUQ7LfjjUSiG5sskOUUSEpU=
+github.com/valyala/fasthttp v1.23.0 h1:0ufwSD9BhWa6f8HWdmdq4FHQ23peRo3Ng/Qs8m5NcFs=
+github.com/valyala/fasthttp v1.23.0/go.mod h1:0mw2RjXGOzxf4NL2jni3gUQ7LfjjUSiG5sskOUUSEpU=
 github.com/valyala/tcplisten v0.0.0-20161114210144-ceec8f93295a/go.mod h1:v3UYOV9WzVtRmSR+PDvWpU/qWl4Wa5LApYYX4ZtKbio=
 github.com/xplorfin/filet v0.1.0 h1:RjEd3J76Cpia+iQXPLymw5ttrtlTI9AByoUJTu0lLEY=
 github.com/xplorfin/filet v0.1.0/go.mod h1:yfDth5y4F/huKhVZIzmR1JjFA7JKVskJJMQoSIGlPQM=
-github.com/xplorfin/netutils v0.36.0 h1:r00uqqd5bldJTgfDUbq2nOr7dI/uERutSDE/dmrnmQo=
-github.com/xplorfin/netutils v0.36.0/go.mod h1:9a9ihp63ZZNVPYfefP93Lck03Y7z7ZHcjAJpb1+8mSQ=
+github.com/xplorfin/netutils v0.37.0 h1:zanCH9ebSMPRL1X/voNhpqomLQigkDXu8Kc1OwTb0BI=
+github.com/xplorfin/netutils v0.37.0/go.mod h1:IbxjfvPY1XgIhq3JohPN/PATFOgluCqcZqkL+80eniM=
 github.com/yudai/gojsondiff v1.0.0 h1:27cbfqXLVEJ1o8I6v3y9lg8Ydm53EKqHXAOMxEGlCOA=
 github.com/yudai/gojsondiff v1.0.0/go.mod h1:AY32+k2cwILAkW1fbgxQ5mUmMiZFgLIV+FBNExI05xg=
 github.com/yudai/golcs v0.0.0-20170316035057-ecda9a501e82 h1:BHyfKlQyqbsFN5p3IfnEUduWvb9is428/nNb5L3U01M=
