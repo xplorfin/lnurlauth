@@ -6,7 +6,6 @@ require (
 	github.com/brianvoe/gofakeit/v5 v5.11.2
 	github.com/btcsuite/btcd v0.21.0-beta
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
-	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fiatjaf/go-lnurl v1.3.1
 	github.com/localtunnel/go-localtunnel v0.0.0-20170326223115-8a804488f275
 	github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
@@ -14,7 +13,7 @@ require (
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e
 	github.com/stretchr/testify v1.7.0
 	github.com/urfave/cli/v2 v2.3.0
-	github.com/xplorfin/netutils v0.36.0
+	github.com/xplorfin/netutils v0.37.0
 	golang.org/x/net v0.0.0-20210326220855-61e056675ecf
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 )
