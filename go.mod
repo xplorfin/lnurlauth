@@ -14,6 +14,6 @@ require (
 	github.com/stretchr/testify v1.7.0
 	github.com/urfave/cli/v2 v2.3.0
 	github.com/xplorfin/netutils v0.38.0
-	golang.org/x/net v0.0.0-20210503060351-7fd8e65b6420
+	golang.org/x/net v0.0.0-20210508051633-16afe75a6701
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 )
