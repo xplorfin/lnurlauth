@@ -27,7 +27,7 @@ jobs:
           WITH_V: false
       -
         name: Set up Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version: 1.14
       - name: login
